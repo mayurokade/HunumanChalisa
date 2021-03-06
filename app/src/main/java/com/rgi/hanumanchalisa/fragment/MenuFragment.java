@@ -30,6 +30,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.Environment;
+import android.provider.AlarmClock;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
@@ -64,8 +65,8 @@ public class MenuFragment extends Fragment {
     final static int RQS_1 = 1;
     String path;
     private static final int PERMISSION_REQUEST_CODE = 1;
-    private String fNmae = "hanuman_chalisa.mp3";
-    private String fPAth = "android.resource://com.rgi.hanumanchalisa/raw/hanuman_chalisa";
+    private String fNmae = "hanumanchalisa.mp3";
+    private String fPAth = "android.resource://com.rgi.hanumanchalisa/raw/hanumanchalisa";
 
     public MenuFragment() {
         // Required empty public constructor
@@ -128,60 +129,43 @@ public class MenuFragment extends Fragment {
         });
 
         binding.llRington.setOnClickListener(v -> {
-            Log.e("TAG", "init: click ringtone ");
-
-           /* if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                setRingTone();
-            } else {
-                // Request permission from the user
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-
-            }*/
             if (Build.VERSION.SDK_INT >= 23) {
-
                 if (checkPermission()) {
-                    if (Settings.System.canWrite(getActivity()))
-                    {
-                        setRingtone();
-                    }
-                    else
-                    {
+                    if (Settings.System.canWrite(getActivity())) {
+                        //setRingtone("Ringtone");
+                        setRingToneNew();
+                    } else {
                         Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                                .setData(Uri.parse("package:" +getActivity().getPackageName()))
+                                .setData(Uri.parse("package:" + getActivity().getPackageName()))
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
-
-
-                    Log.e("value", "Permission already Granted, Now you can save image.");
                 } else {
                     requestPermission();
                 }
-            }else{
-                setRingtone();
-                Log.e("value", "Not required for requesting runtime permission");
+            } else {
+                setRingtone("Ringtone");
             }
         });
 
-        binding.llBackImage.setOnClickListener(v->{
+        binding.llBackImage.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(binding.getRoot());
             navController.navigate(R.id.action_menuFragment_to_setBackgroundFragment);
         });
 
-        binding.llSms.setOnClickListener(v->{
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setType("vnd.android-dir/mms-sms");
-            int flags = Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP;
-            intent.setFlags(flags);
+        binding.llSms.setOnClickListener(v -> {
+            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+            smsIntent.setType("vnd.android-dir/mms-sms");
+            smsIntent.putExtra("address", "");
             String path = "https://play.google.com/store/apps/details?id=" + getActivity().getPackageName();
-            intent.putExtra("sms_body", path);
-            intent.setData(Uri.parse("content://sms/inbox"));
-            getActivity().startActivity(intent);
+            smsIntent.putExtra("sms_body", path);
+            startActivity(smsIntent);
+
         });
 
-        binding.llWhatsApp.setOnClickListener(v->{whatsAppMsg();});
+        binding.llWhatsApp.setOnClickListener(v -> {
+            whatsAppMsg();
+        });
     }
 
     private void whatsAppMsg() {
@@ -237,7 +221,7 @@ public class MenuFragment extends Fragment {
                     Log.e("value", "Permission Granted, Now you can save image .");
                     if (Build.VERSION.SDK_INT >= 23) {
                         if (Settings.System.canWrite(getActivity())) {
-                            setRingtone();
+                            setRingToneNew();
                         } else {
                             Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS)
                                     .setData(Uri.parse("package:" + getActivity().getPackageName()))
@@ -253,10 +237,10 @@ public class MenuFragment extends Fragment {
     }
 
     public boolean saveas(int type) {
-        Log.e("TAG", "inside saveas: ");
+        Log.e("TAG", "inside saveas: " + path);
         byte[] buffer = null;
         InputStream fIn = getActivity().getResources().openRawResource(
-                R.raw.hanuman_chalisa);
+                R.raw.hanumanchalisa);
         int size = 0;
 
         try {
@@ -285,22 +269,35 @@ public class MenuFragment extends Fragment {
             save.flush();
             save.close();
         } catch (FileNotFoundException e) {
+            Log.e("TAG", "saveas:FileNotFoundException " + e.getMessage());
+            e.printStackTrace();
             return false;
         } catch (IOException e) {
+            Log.e("TAG", "saveas:IOException " + e.getMessage());
             e.printStackTrace();
             return false;
 
         }
 
-        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + path + filename + ".mp3"
-                + Environment.getExternalStorageDirectory())));
+        /*getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + path + filename + ".mp3"
+                + Environment.getExternalStorageDirectory())));*/
+
+        final Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        final Uri contentUri = Uri.parse("file://" + path + filename + ".mp3"
+                + Environment.getExternalStorageDirectory());
+        scanIntent.setData(contentUri);
+        getActivity().sendBroadcast(scanIntent);
 
 
         File k = new File(path, filename);
 
         ContentValues values = new ContentValues();
         long current = System.currentTimeMillis();
-        values.put(MediaStore.MediaColumns.DATA, path + filename);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            values.put(MediaStore.Audio.AudioColumns.DATA, path + filename);
+        else
+            values.put(MediaStore.MediaColumns.DATA, path + filename);
+
         values.put(MediaStore.MediaColumns.TITLE, filename);
         values.put(MediaStore.Audio.Media.DATE_ADDED, (int) (current / 1000));
         values.put(MediaStore.Audio.Media.MIME_TYPE, "audio/mp3");
@@ -309,19 +306,26 @@ public class MenuFragment extends Fragment {
         values.put(MediaStore.Audio.Media.ARTIST, "cssounds ");
         values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
         values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
-        values.put(MediaStore.Audio.Media.IS_ALARM, false);
-        values.put(MediaStore.Audio.Media.IS_MUSIC, false);
+        values.put(MediaStore.Audio.Media.IS_ALARM, true);
+        values.put(MediaStore.Audio.Media.IS_MUSIC, true);
 
         Log.e("TAG", "saveas: path " + path);
 
-        Uri newUri = getActivity().getContentResolver()
+        Uri uri = MediaStore.Audio.Media.getContentUriForPath(k
+                .getAbsolutePath());
+        getActivity().getContentResolver().delete(
+                uri,
+                MediaStore.MediaColumns.DATA + "=\""
+                        + k.getAbsolutePath() + "\"", null);
+        Uri newUri = getActivity().getContentResolver().insert(uri, values);
+
+      /*  Uri newUri = getActivity().getContentResolver()
                 .insert(MediaStore.Audio.Media.getContentUriForPath(k
-                        .getAbsolutePath()), values);
+                        .getAbsolutePath()), values);*/
         RingtoneManager.setActualDefaultRingtoneUri(getActivity(), RingtoneManager.TYPE_RINGTONE, newUri);
-
-
+        Log.e("TAG", "saveas: uri " + newUri);
+        Toast.makeText(getActivity(), new StringBuilder().append("Ringtone set successfully"), Toast.LENGTH_LONG).show();
         return true;
-
     }
 
     private void openTimePickerDialog(boolean is24r) {
@@ -357,28 +361,44 @@ public class MenuFragment extends Fragment {
                 //Today Set time passed, count to tomorrow
                 calSet.add(Calendar.DATE, 1);
             }
-
-            setAlarm(calSet);
+            Log.e("TAG", "onTimeSet: time " + hourOfDay + ":" + minute);
+            setAlarm(calSet, hourOfDay, minute);
         }
     };
 
-    private void setAlarm(Calendar targetCal) {
+    private void setAlarm(Calendar targetCal, int hourOfDay, int minute) {
 
-        Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+       /* Intent intent = new Intent(getActivity(), AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), RQS_1, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);*/
+
+        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        i.putExtra(AlarmClock.EXTRA_HOUR, hourOfDay);
+        i.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        i.putExtra(AlarmClock.EXTRA_MESSAGE, "Hanuman Chalisa Alarm");
+
+        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(i);
+        } else {
+            Toast.makeText(getActivity(), "There is no app that support this action", Toast.LENGTH_SHORT).show();
+        }
+
+        setRingtone("Alarm");
 
     }
 
 
-    private void setRingtone(){
+    private void setRingtone(String ringtone) {
         AssetFileDescriptor openAssetFileDescriptor;
-        ((AudioManager)  getActivity().getSystemService(AUDIO_SERVICE)).setRingerMode(2);
-        File file = new File(Environment.getExternalStorageDirectory() + "/appkeeda", this.fNmae);
+        ((AudioManager) getActivity().getSystemService(AUDIO_SERVICE)).setRingerMode(2);
+        File file = new File(Environment.getExternalStorageDirectory() + "/appkeeda", fNmae);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
+
+        if (!file.getParentFile().exists())
+            file.getParentFile().mkdirs();
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -404,6 +424,8 @@ public class MenuFragment extends Fragment {
         } catch (IOException e3) {
             e3.printStackTrace();
         }
+
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("_data", file.getAbsolutePath());
         contentValues.put("title", "nkDroid ringtone");
@@ -412,11 +434,17 @@ public class MenuFragment extends Fragment {
         contentValues.put("artist", Integer.valueOf(R.string.app_name));
         contentValues.put("is_ringtone", Boolean.valueOf(true));
         contentValues.put("is_notification", Boolean.valueOf(false));
-        contentValues.put("is_alarm", Boolean.valueOf(false));
-        contentValues.put("is_music", Boolean.valueOf(false));
+        contentValues.put("is_alarm", Boolean.valueOf(true));
+        contentValues.put("is_music", Boolean.valueOf(true));
         try {
-            Toast.makeText(getActivity(), new StringBuilder().append("Ringtone set successfully"), Toast.LENGTH_LONG).show();
-            RingtoneManager.setActualDefaultRingtoneUri(getActivity(), 1, contentResolver.insert(MediaStore.Audio.Media.getContentUriForPath(file.getAbsolutePath()), contentValues));
+
+            if (ringtone.equalsIgnoreCase("Ringtone")) {
+                Toast.makeText(getActivity(), new StringBuilder().append("Ringtone set successfully"), Toast.LENGTH_LONG).show();
+                RingtoneManager.setActualDefaultRingtoneUri(getActivity(), RingtoneManager.TYPE_RINGTONE, contentResolver.insert(MediaStore.Audio.Media.getContentUriForPath(file.getAbsolutePath()), contentValues));
+            } else {
+                Toast.makeText(getActivity(), new StringBuilder().append("Alarm set successfully"), Toast.LENGTH_LONG).show();
+                RingtoneManager.setActualDefaultRingtoneUri(getActivity(), RingtoneManager.TYPE_ALARM, contentResolver.insert(MediaStore.Audio.Media.getContentUriForPath(file.getAbsolutePath()), contentValues));
+            }
         } catch (Throwable th) {
             Toast.makeText(getActivity(), new StringBuilder().append("Ringtone feature is not working"), Toast.LENGTH_LONG).show();
         }

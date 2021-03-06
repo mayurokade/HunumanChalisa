@@ -17,12 +17,15 @@ import com.rgi.hanumanchalisa.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding mainBinding;
     NavController navController;
+    public static MediaPlayer mediaPlayer;
+    public static int test;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //((MainActivity) mcontext)
+        mediaPlayer = new MediaPlayer();
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(mainBinding.toolbar);
         navController = Navigation.findNavController(this, R.id.fragment2);

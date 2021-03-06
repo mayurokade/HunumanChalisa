@@ -21,7 +21,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,38 +32,35 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
+
 import com.rgi.hanumanchalisa.R;
 import com.rgi.hanumanchalisa.adapter.AdvertiseBannerAdapter;
 import com.rgi.hanumanchalisa.databinding.FragmentHomeBinding;
 import com.whinc.widget.ratingbar.RatingBar;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.rgi.hanumanchalisa.activities.MainActivity.mediaPlayer;
+
 
 public class HomeFragment extends Fragment {
-    FragmentHomeBinding binding;
+    public static FragmentHomeBinding binding;
     private Timer timer;
     private int position = -1;
     private int advertisePosition = 1;
     Dialog dialog;
-    public static MediaPlayer mediaPlayer = null;
+
+    public static boolean isPlaying;
     ArrayList<Integer> advertiseList = new ArrayList<>();
 
     Handler handler = new Handler();
+    Timer timer1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -222,10 +218,9 @@ public class HomeFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        loadBanner();
-        mediaPlayer = new MediaPlayer();
-        binding.seekBar.setMax(100);
 
+
+        binding.seekBar.setMax(100);
         binding.ivRightBell.setOnClickListener(v -> {
             final NavController navController = Navigation.findNavController(binding.getRoot());
             navController.navigate(R.id.action_homeFragment_to_chaliesTextFragment);
@@ -261,8 +256,9 @@ public class HomeFragment extends Fragment {
         });
 
         //   loadMusic();
-        prepareMediaPlayer();
-        resetMedia();
+        if (!mediaPlayer.isPlaying())
+            prepareMediaPlayer();
+
         binding.seekBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -300,7 +296,7 @@ public class HomeFragment extends Fragment {
 
     public void prepareMediaPlayer() {
         try {
-            mediaPlayer = MediaPlayer.create(getActivity(), R.raw.hanuman_chalisa);
+            mediaPlayer = MediaPlayer.create(getActivity(), R.raw.hanumanchalisa);
 //            mediaPlayer.prepare();
             binding.tvTotalTime.setText(millisecondToTimer(mediaPlayer.getDuration()));
         } catch (Exception e) {
@@ -388,7 +384,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        Timer timer1 = new Timer();
+         timer1 = new Timer();
         timer1.scheduleAtFixedRate(new RemindTask1(), 0, 2000);
 
     }
@@ -413,5 +409,33 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mediaPlayer.isPlaying()) {
+            binding.ivPlay.setImageResource(R.drawable.ic_pause);
+            updateSeekBar();
+            binding.tvTotalTime.setText(millisecondToTimer(mediaPlayer.getDuration()));
+        }
+        loadBanner();
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(timer1 != null){
+            timer1.cancel();
+            //cancel timer task and assign null
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(timer1 != null){
+            timer1.cancel();
+            //cancel timer task and assign null
+        }
+    }
 }
