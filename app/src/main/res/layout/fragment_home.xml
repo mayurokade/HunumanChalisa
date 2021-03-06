@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.HomeFragment">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp40" />
+
+                <ImageView
+                    android:id="@+id/ivRightBell"
+                    android:layout_width="@dimen/dp70"
+                    android:layout_height="@dimen/dp70"
+                    android:layout_marginRight="-10dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_bell_right" />
+
+                <ImageView
+                    android:id="@+id/ivLeftBell"
+                    android:layout_width="@dimen/dp70"
+                    android:layout_height="@dimen/dp70"
+                    android:layout_marginLeft="-10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_bell_left" />
+
+
+                <ImageView
+                    android:id="@+id/ivShank"
+                    android:layout_width="@dimen/dp50"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_shank" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:orientation="vertical"
+                android:padding="@dimen/dp10">
+                <!--  <com.google.android.exoplayer2.ui.PlayerView
+                      android:id="@+id/playerView"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      />-->
+                <LinearLayout
+                    android:id="@+id/linSeek"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_below="@+id/ivBanner"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:theme="@style/SeekBarColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvCompleted"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/dp15"
+                        android:text="0.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp16"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tvTotalTime"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:gravity="center_vertical|end"
+                        android:paddingRight="@dimen/dp15"
+                        android:text="0.00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp16"
+                        app:fontFamily="@font/roboto_regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:layout_weight="0.1">
+
+                        <ImageView
+                            android:id="@+id/ivPrevious"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_previous" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="0.1">
+
+                        <ImageView
+                            android:id="@+id/ivPlay"
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="@dimen/dp50"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_play" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1">
+
+                        <ImageView
+                            android:id="@+id/ivNext"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_next" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

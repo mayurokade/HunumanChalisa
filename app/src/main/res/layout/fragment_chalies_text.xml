@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".fragment.ChaliesTextFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/doha_gradiant">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDohaHindi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="visible"
+                android:padding="@dimen/dp20"
+                android:text="॥ चौपाई ॥\n\n
+जय हनुमान ज्ञान गुन सागर ।\n
+जय कपीस तिहुँ लोक उजागर ॥\n\n
+
+राम दूत अतुलित बल धामा ।\n
+अंजनि पुत्र पवनसुत नामा ॥\n\n
+
+महाबीर बिक्रम बजरंगी ।\n
+कुमति निवार सुमति के संगी ॥\n\n
+
+कंचन बरन बिराज सुबेसा ।\n
+कानन कुण्डल कुँचित केसा ॥४॥\n\n
+
+हाथ बज्र अरु ध्वजा बिराजै ।\n
+काँधे मूँज जनेउ साजै ॥\n\n
+
+शंकर सुवन केसरी नंदन ।\n
+तेज प्रताप महा जगवंदन ॥\n\n
+
+बिद्यावान गुनी अति चातुर ।\n
+राम काज करिबे को आतुर ॥\n\n
+
+प्रभु चरित्र सुनिबे को रसिया ।\n
+राम लखन सीता मन बसिया ॥८॥\n\n
+
+सूक्ष्म रूप धरि सियहिं दिखावा ।\n
+बिकट रूप धरि लंक जरावा ॥\n\n
+
+भीम रूप धरि असुर सँहारे ।\n
+रामचन्द्र के काज सँवारे ॥\n\n
+
+लाय सजीवन लखन जियाए ।\n
+श्री रघुबीर हरषि उर लाये ॥\n\n
+
+रघुपति कीन्ही बहुत बड़ाई ।\n
+तुम मम प्रिय भरतहि सम भाई ॥१२॥\n\n
+
+सहस बदन तुम्हरो जस गावैं ।\n
+अस कहि श्रीपति कण्ठ लगावैं ॥\n\n
+
+सनकादिक ब्रह्मादि मुनीसा ।\n
+नारद सारद सहित अहीसा ॥\n\n
+
+जम कुबेर दिगपाल जहाँ ते ।\n
+कबि कोबिद कहि सके कहाँ ते ॥\n\n
+
+तुम उपकार सुग्रीवहिं कीह्ना ।\n
+राम मिलाय राज पद दीह्ना ॥१६॥\n\n
+
+तुम्हरो मंत्र बिभीषण माना ।\n
+लंकेश्वर भए सब जग जाना ॥\n\n
+
+जुग सहस्त्र जोजन पर भानु ।\n
+लील्यो ताहि मधुर फल जानू ॥\n\n
+
+प्रभु मुद्रिका मेलि मुख माहीं ।\n
+जलधि लाँघि गये अचरज नाहीं ॥\n\n
+
+दुर्गम काज जगत के जेते ।\n
+सुगम अनुग्रह तुम्हरे तेते ॥२०॥\n\n
+
+राम दुआरे तुम रखवारे ।\n
+होत न आज्ञा बिनु पैसारे ॥\n\n
+
+सब सुख लहै तुम्हारी सरना ।\n
+तुम रक्षक काहू को डरना ॥\n\n
+
+आपन तेज सम्हारो आपै ।\n
+तीनों लोक हाँक तै काँपै ॥\n\n
+
+भूत पिशाच निकट नहिं आवै ।\n
+महावीर जब नाम सुनावै ॥२४॥\n\n
+
+नासै रोग हरै सब पीरा ।\n
+जपत निरंतर हनुमत बीरा ॥\n\n
+
+संकट तै हनुमान छुडावै ।\n
+मन क्रम बचन ध्यान जो लावै ॥\n\n
+
+सब पर राम तपस्वी राजा ।\n
+तिनके काज सकल तुम साजा ॥\n\n
+
+और मनोरथ जो कोई लावै ।\n
+सोई अमित जीवन फल पावै ॥२८॥\n\n
+
+चारों जुग परताप तुम्हारा ।\n
+है परसिद्ध जगत उजियारा ॥\n\n
+
+साधु सन्त के तुम रखवारे ।\n
+असुर निकंदन राम दुलारे ॥\n\n
+
+अष्ट सिद्धि नौ निधि के दाता ।\n
+अस बर दीन जानकी माता ॥\n\n
+
+राम रसायन तुम्हरे पासा ।\n
+सदा रहो रघुपति के दासा ॥३२॥\n\n
+
+तुम्हरे भजन राम को पावै ।\n
+जनम जनम के दुख बिसरावै ॥\n\n
+
+अंतकाल रघुवरपुर जाई ।\n
+जहाँ जन्म हरिभक्त कहाई ॥\n\n
+
+और देवता चित्त ना धरई ।\n
+हनुमत सेइ सर्ब सुख करई ॥\n\n
+
+संकट कटै मिटै सब पीरा ।\n
+जो सुमिरै हनुमत बलबीरा ॥३६॥\n\n
+
+जै जै जै हनुमान गोसाईं ।\n
+कृपा करहु गुरुदेव की नाईं ॥\n\n
+
+जो सत बार पाठ कर कोई ।\n
+छूटहि बंदि महा सुख होई ॥\n\n
+
+जो यह पढ़ै हनुमान चालीसा ।\n
+होय सिद्धि साखी गौरीसा ॥\n\n
+
+तुलसीदास सदा हरि चेरा ।\n
+कीजै नाथ हृदय मह डेरा ॥४०॥\n\n
+
+॥ दोहा ॥\n\n
+पवन तनय संकट हरन,\n
+मंगल मूरति रूप ।\n
+राम लखन सीता सहित,\n
+हृदय बसहु सुर भूप ॥\n"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/tvDohaEng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:padding="@dimen/dp20"
+                android:textSize="21sp"
+                android:text="॥ dohā ॥\n\n
+śrī guru charaṇa saroja raja nijamana mukura sudhāri |\n
+varaṇau raghuvara vimalayaśa jo dāyaka phalachāri ‖\n\n
+buddhihīna tanujānikai sumirau pavana kumāra |\n
+bala buddhi vidyā dehu mohi harahu kaleśa vikāra ‖\n\n
+
+॥ dhyānam ॥\n\n
+gośhpadīkṛta vārāśiṃ maśakīkṛta rākśhasam |\n
+rāmāyaṇa mahāmālā ratnaṃ vande-(a)nilātmajam ‖\n\n
+yatra yatra raghunātha kīrtanaṃ tatra tatra kṛtamastakāñjalim |\n
+bhāśhpavāri paripūrṇa lochanaṃ mārutiṃ namata rākśhasāntakam ‖\n\n
+
+॥ chaupāī ॥\n\n
+jaya hanumāna jJṇāna guṇa sāgara |\n
+jaya kapīśa tihu loka ujāgara ‖ 1 ‖\n\n
+
+rāmadūta atulita baladhāmā |\n
+añjani putra pavanasuta nāmā ‖ 2 ‖\n\n
+
+mahāvīra vikrama bajaraṅgī |\n
+kumati nivāra sumati ke saṅgī ‖3 ‖\n\n
+
+kañchana varaṇa virāja suveśā |\n
+kānana kuṇḍala kuñchita keśā ‖ 4 ‖\n\n
+
+hāthavajra au dhvajā virājai |\n
+kānthe mūñja janevū sājai ‖ 5‖\n\n
+
+śaṅkara suvana kesarī nandana |\n
+teja pratāpa mahājaga vandana ‖ 6 ‖\n\n
+
+vidyāvāna guṇī ati chātura |\n
+rāma kāja karive ko ātura ‖ 7 ‖\n\n
+
+prabhu charitra sunive ko rasiyā |\n
+rāmalakhana sītā mana basiyā ‖ 8‖\n\n
+
+sūkśhma rūpadhari siyahi dikhāvā |\n
+vikaṭa rūpadhari laṅka jalāvā ‖ 9 ‖\n\n
+
+bhīma rūpadhari asura saṃhāre |\n
+rāmachandra ke kāja saṃvāre ‖ 10 ‖\n\n
+
+lāya sañjīvana lakhana jiyāye |\n
+śrī raghuvīra haraśhi uralāye ‖ 11 ‖\n\n
+
+raghupati kīnhī bahuta baḍāyī |\n
+tuma mama priya bharata sama bhāyī ‖ 12 ‖\n\n
+
+sahasra vadana tumharo yaśagāvai |\n
+asa kahi śrīpati kaṇṭha lagāvai ‖ 13 ‖\n\n
+
+sanakādika brahmādi munīśā |\n
+nārada śārada sahita ahīśā ‖ 14 ‖\n\n
+
+yama kubera digapāla jahāṃ te |\n
+kavi kovida kahi sake kahāṃ te ‖ 15 ‖\n\n
+tuma upakāra sugrīvahi kīnhā |\n
+rāma milāya rājapada dīnhā ‖ 16 ‖\n\n
+
+tumharo mantra vibhīśhaṇa mānā |\n
+laṅkeśvara bhaye saba jaga jānā ‖ 17 ‖\n\n
+
+yuga sahasra yojana para bhānū |\n
+līlyo tāhi madhura phala jānū ‖ 18 ‖\n\n
+
+prabhu mudrikā meli mukha māhī |\n
+jaladhi lāṅghi gaye acharaja nāhī ‖ 19 ‖\n\n
+
+durgama kāja jagata ke jete |\n
+sugama anugraha tumhare tete ‖ 20 ‖\n\n
+
+rāma duāre tuma rakhavāre |\n
+hota na ājJṇā binu paisāre ‖ 21 ‖\n\n
+
+saba sukha lahai tumhārī śaraṇā |\n
+tuma rakśhaka kāhū ko ḍara nā ‖ 22 ‖\n\n
+
+āpana teja samhāro āpai |\n
+tīnoṃ loka hāṅka te kāmpai ‖ 23 ‖\n\n
+
+bhūta piśācha nikaṭa nahi āvai |\n
+mahavīra jaba nāma sunāvai ‖ 24 ‖\n\n
+
+nāsai roga harai saba pīrā |\n
+japata nirantara hanumata vīrā ‖ 25 ‖\n\n
+
+saṅkaṭa se hanumāna Chuḍāvai |\n
+mana krama vachana dhyāna jo lāvai ‖ 26 ‖\n\n
+
+saba para rāma tapasvī rājā |\n
+tinake kāja sakala tuma sājā ‖ 27 ‖\n\n
+
+aura manoradha jo koyi lāvai |\n
+tāsu amita jīvana phala pāvai ‖ 28 ‖\n\n
+
+chāro yuga pratāpa tumhārā |\n
+hai prasiddha jagata ujiyārā ‖ 29 ‖\n\n
+
+sādhu santa ke tuma rakhavāre |\n
+asura nikandana rāma dulāre ‖ 30 ‖\n\n
+
+aśhṭhasiddhi nava nidhi ke dātā |\n
+asa vara dīnha jānakī mātā ‖ 31 ‖\n\n
+
+rāma rasāyana tumhāre pāsā |\n
+sadā raho raghupati ke dāsā ‖ 32 ‖\n\n
+
+tumhare bhajana rāmako pāvai |\n
+janma janma ke dukha bisarāvai ‖ 33 ‖\n\n
+
+anta kāla raghupati purajāyī |\n
+jahāṃ janma haribhakta kahāyī ‖ 34 ‖\n\n
+
+aura devatā chitta na dharayī |\n
+hanumata seyi sarva sukha karayī ‖ 35 ‖\n\n
+
+saṅkaṭa ka(ha)ṭai miṭai saba pīrā |\n
+jo sumirai hanumata bala vīrā ‖ 36 ‖\n\n
+
+jai jai jai hanumāna gosāyī |\n
+kṛpā karahu gurudeva kī nāyī ‖ 37 ‖\n\n
+
+jo śata vāra pāṭha kara koyī |\n
+Chūṭahi bandi mahā sukha hoyī ‖ 38 ‖\n\n
+
+jo yaha paḍai hanumāna chālīsā |\n
+hoya siddhi sākhī gaurīśā ‖ 39 ‖\n\n
+
+tulasīdāsa sadā hari cherā |\n
+kījai nātha hṛdaya maha ḍerā ‖ 40 ‖\n\n
+
+॥ dohā ॥\n
+pavana tanaya saṅkaṭa haraṇa – maṅgalda mūrati rūp |\n
+rāma lakhana sītā sahita – hṛdaya basahu surabhūp ‖\n
+siyāvara rāmachandrakī jaya |\n pavanasuta hanumānakī jaya |\n bolo bhāyī saba santanakī jaya |"/>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

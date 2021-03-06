@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.rgi.hanumanchalisa.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_chaliesTextFragment"
+            app:destination="@id/chaliesTextFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chaliesTextFragment"
+        android:name="com.rgi.hanumanchalisa.fragment.ChaliesTextFragment"
+        android:label="fragment_chalies_text"
+        tools:layout="@layout/fragment_chalies_text" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.rgi.hanumanchalisa.fragment.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_setBackgroundFragment"
+            app:destination="@id/setBackgroundFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.rgi.hanumanchalisa.fragment.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" >
+        <argument
+            android:name="type"
+            app:argType="string"
+            android:defaultValue="contact" />
+    </fragment>
+    <fragment
+        android:id="@+id/setBackgroundFragment"
+        android:name="com.rgi.hanumanchalisa.fragment.SetBackgroundFragment"
+        android:label="fragment_set_background"
+        tools:layout="@layout/fragment_set_background" />
+</navigation>

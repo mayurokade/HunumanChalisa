@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.PrivacyPolicyFragment">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/doha_gradiant"
+        android:orientation="vertical"
+        android:padding="@dimen/dp10">
+
+        <LinearLayout
+            android:id="@+id/llPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Privacy Police"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp22"
+                android:visibility="gone"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/str_privacy"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:fontFamily="@font/roboto_regular" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llContact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact Us"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp22"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/str_contact"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:fontFamily="@font/roboto_regular" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTerm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp22"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/str_terms"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:fontFamily="@font/roboto_regular" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</layout>

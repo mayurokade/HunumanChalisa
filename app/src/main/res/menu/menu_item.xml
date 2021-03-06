@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <item
+        android:id="@+id/action_whatsapp"
+        android:icon="@drawable/ic_whatsapp"
+        app:showAsAction="always"
+
+        android:title="WhatsApp" />
+    <!--app:actionLayout="@layout/attend"-->
+    <item
+        android:id="@+id/action_rating"
+        android:icon="@drawable/ic_star_selected"
+        app:showAsAction="always"
+        android:title="Rating" />
+
+    <item
+        android:id="@+id/action_down"
+        android:icon="@drawable/ic_text_down"
+        app:showAsAction="always"
+        android:title="Text Down" />
+    <!--app:actionLayout="@layout/attend"-->
+    <item
+        android:id="@+id/action_up"
+        android:icon="@drawable/ic_text_up"
+        app:showAsAction="always"
+        android:title="Text Up" />
+
+    <item
+        android:id="@+id/action_change_lang"
+        android:icon="@drawable/ic_text_change"
+        app:showAsAction="always"
+        android:title="Text Up" />
+    <!--app:actionLayout="@layout/notification"-->
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="About Us"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_menu"
+        android:orderInCategory="100"
+        android:title="Menu"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_privacy"
+        android:orderInCategory="100"
+        android:title="Privacy Policy"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_terms"
+        android:orderInCategory="100"
+        android:title="@string/terms_condition"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_feedback"
+        android:orderInCategory="100"
+        android:title="Feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_contact"
+        android:orderInCategory="100"
+        android:title="Contact US"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Rating"
+        android:orderInCategory="100"
+        android:title="Rating The App"
+        app:showAsAction="never" />
+
+
+</menu>
