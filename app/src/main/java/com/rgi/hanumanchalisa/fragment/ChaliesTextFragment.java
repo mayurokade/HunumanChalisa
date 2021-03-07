@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,11 +24,13 @@ import com.rgi.hanumanchalisa.databinding.FragmentChaliesTextBinding;
 
 public class ChaliesTextFragment extends Fragment {
     FragmentChaliesTextBinding binding;
-    boolean changeLang= false;
+    boolean changeLang = false;
+    int txtSize = 21;
 
     public ChaliesTextFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,22 +61,32 @@ public class ChaliesTextFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_up){
+        if (id == R.id.action_up) {
             //Do whatever you want to do
+            if (txtSize < 25) {
+                txtSize++;
+                binding.tvDohaEng.setTextSize(txtSize);
+                binding.tvDohaHindi.setTextSize(txtSize);
+            }
             return true;
         }
-        if(id == R.id.action_down){
+        if (id == R.id.action_down) {
             //Do whatever you want to do
+            if (txtSize > 14) {
+                txtSize--;
+                binding.tvDohaEng.setTextSize(txtSize);
+                binding.tvDohaHindi.setTextSize(txtSize);
+            }
             return true;
         }
-        if(id == R.id.action_change_lang){
+        if (id == R.id.action_change_lang) {
             //Do whatever you want to do
-            if(changeLang){
-                changeLang =false;
+            if (changeLang) {
+                changeLang = false;
                 binding.tvDohaHindi.setVisibility(View.VISIBLE);
                 binding.tvDohaEng.setVisibility(View.GONE);
-            }else{
-                changeLang =true;
+            } else {
+                changeLang = true;
                 binding.tvDohaHindi.setVisibility(View.GONE);
                 binding.tvDohaEng.setVisibility(View.VISIBLE);
             }
@@ -87,9 +100,13 @@ public class ChaliesTextFragment extends Fragment {
     private void init() {
         binding.tvDohaHindi.setVisibility(View.VISIBLE);
         changeLang = false;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Hanuman Chalisa");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CD5526")));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Hanuman Chalisa");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CD5526")));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        binding.tvDohaEng.setTextSize(txtSize);
+        binding.tvDohaHindi.setTextSize(txtSize);
+
     }
 }

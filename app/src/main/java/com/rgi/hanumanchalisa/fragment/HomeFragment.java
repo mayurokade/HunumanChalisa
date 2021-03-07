@@ -248,6 +248,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        binding.ivNext.setOnClickListener(v->{resetMedia();});
+        binding.ivPrevious.setOnClickListener(v->{resetMedia();});
+
+
         //   loadMusic();
         if (!mediaPlayer.isPlaying())
             prepareMediaPlayer();
