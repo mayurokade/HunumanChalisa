@@ -18,7 +18,7 @@ import com.rgi.hanumanchalisa.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding mainBinding;
     NavController navController;
-    public static MediaPlayer mediaPlayer;
+
     public static int test;
 
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //((MainActivity) mcontext)
-        mediaPlayer = new MediaPlayer();
+
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setSupportActionBar(mainBinding.toolbar);
         navController = Navigation.findNavController(this, R.id.fragment2);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         (dialog, which) -> {
                             // Perform Action & Dismiss dialog
                             finish();
-                            System.exit(0);
+                           // System.exit(0);
                         }).setNegativeButton(getString(R.string.str_no), (dialog, which) -> {
             // Do nothing
             dialog.dismiss();

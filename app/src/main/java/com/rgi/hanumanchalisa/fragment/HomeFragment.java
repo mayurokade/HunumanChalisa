@@ -38,13 +38,14 @@ import android.widget.Toast;
 import com.rgi.hanumanchalisa.R;
 import com.rgi.hanumanchalisa.adapter.SliderAdapter;
 import com.rgi.hanumanchalisa.databinding.FragmentHomeBinding;
+import com.rgi.hanumanchalisa.services.MediaplayerService;
 import com.smarteist.autoimageslider.SliderView;
 import com.whinc.widget.ratingbar.RatingBar;
 
 import java.util.ArrayList;
 import java.util.Timer;
 
-import static com.rgi.hanumanchalisa.activities.MainActivity.mediaPlayer;
+import static com.rgi.hanumanchalisa.app.App.mediaPlayer;
 
 
 public class HomeFragment extends Fragment {
@@ -241,10 +242,12 @@ public class HomeFragment extends Fragment {
                 handler.removeCallbacks(updater);
                 mediaPlayer.pause();
                 binding.ivPlay.setImageResource(R.drawable.ic_play);
+                getActivity().stopService(new Intent(getActivity(),MediaplayerService.class));
             } else {
                 mediaPlayer.start();
                 binding.ivPlay.setImageResource(R.drawable.ic_pause);
                 updateSeekBar();
+                getActivity().startService(new Intent(getActivity(), MediaplayerService.class));
             }
         });
 
@@ -287,11 +290,14 @@ public class HomeFragment extends Fragment {
             binding.ivPlay.setImageResource(R.drawable.ic_play);
             binding.tvCompleted.setText("0.00");
             mediaPlayer.reset();
+            getActivity().stopService(new Intent(getActivity(),MediaplayerService.class));
             prepareMediaPlayer();
+
         }
     }
 
     public void prepareMediaPlayer() {
+
         try {
             mediaPlayer = MediaPlayer.create(getActivity(), R.raw.hanumanchalisa);
 //            mediaPlayer.prepare();
