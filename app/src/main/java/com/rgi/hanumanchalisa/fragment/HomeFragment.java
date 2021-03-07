@@ -18,7 +18,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -28,7 +27,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -38,29 +36,22 @@ import android.widget.Toast;
 
 
 import com.rgi.hanumanchalisa.R;
-import com.rgi.hanumanchalisa.adapter.AdvertiseBannerAdapter;
+import com.rgi.hanumanchalisa.adapter.SliderAdapter;
 import com.rgi.hanumanchalisa.databinding.FragmentHomeBinding;
+import com.smarteist.autoimageslider.SliderView;
 import com.whinc.widget.ratingbar.RatingBar;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.rgi.hanumanchalisa.activities.MainActivity.mediaPlayer;
 
 
 public class HomeFragment extends Fragment {
     public static FragmentHomeBinding binding;
-    private Timer timer;
-    private int position = -1;
-    private int advertisePosition = 1;
     Dialog dialog;
-
-    public static boolean isPlaying;
     ArrayList<Integer> advertiseList = new ArrayList<>();
-
     Handler handler = new Handler();
-    Timer timer1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -78,7 +69,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        //
     }
 
     @Override
@@ -227,13 +217,6 @@ public class HomeFragment extends Fragment {
 
         });
 
-        MediaPlayer mpBell = MediaPlayer.create(getActivity(), R.raw.temple_bell);
-        binding.ivLeftBell.setOnClickListener(v -> {
-            Animation rotate = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate);
-            binding.ivLeftBell.setAnimation(rotate);
-            if (!mpBell.isPlaying())
-                mpBell.start();
-        });
 
         MediaPlayer mpShank = MediaPlayer.create(getActivity(), R.raw.shankh_sound);
         binding.ivShank.setOnClickListener(v -> {
@@ -242,6 +225,16 @@ public class HomeFragment extends Fragment {
             if (!mpShank.isPlaying())
                 mpShank.start();
         });
+
+
+        MediaPlayer mpBell = MediaPlayer.create(getActivity(), R.raw.temple_bell);
+        binding.ivLeftBell.setOnClickListener(v -> {
+            Animation rotate = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate);
+            binding.ivLeftBell.setAnimation(rotate);
+            if (!mpBell.isPlaying())
+                mpBell.start();
+        });
+
 
         binding.ivPlay.setOnClickListener(v -> {
             if (mediaPlayer.isPlaying()) {
@@ -340,74 +333,22 @@ public class HomeFragment extends Fragment {
         return timeStarting;
     }
 
- /*   private void loadMusic() {
-        binding.playerView.setControllerShowTimeoutMs(0);
-        binding.playerView.setCameraDistance(30);
-        SimpleExoPlayer simpleExoPlayer = new SimpleExoPlayer.Builder(getActivity()).build();
-        binding.playerView.setPlayer(simpleExoPlayer);
-        DataSource.Factory datasourceFactory = new DefaultDataSourceFactory(getActivity(),
-                Util.getUserAgent(getActivity(),"Hanuman Chalisa"));
-        MediaSource audioSource = new ProgressiveMediaSource.Factory(datasourceFactory).createMediaSource(
-                Uri.parse(""));
-        simpleExoPlayer.prepare(audioSource);
-        simpleExoPlayer.setPlayWhenReady(true);
-    }*/
 
     private void loadBanner() {
 
-        advertiseList.add(R.drawable.ic_feedback);
+      //  advertiseList.add(R.drawable.ic_feedback);
         advertiseList.add(R.drawable.image_three);
         advertiseList.add(R.drawable.image_four);
         advertiseList.add(R.drawable.image_five);
         advertiseList.add(R.drawable.image_two);
 
-        binding.rvBanner.setHasFixedSize(true);
-        binding.rvBanner.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        binding.rvBanner.setAdapter(new AdvertiseBannerAdapter(getActivity(), advertiseList));
-        binding.rvBanner.getAdapter().notifyDataSetChanged();
-        binding.rvBanner.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-
-                    @Override
-                    public boolean onPreDraw() {
-                        binding.rvBanner.getViewTreeObserver().removeOnPreDrawListener(this);
-
-                        for (int i = 0; i < binding.rvBanner.getChildCount(); i++) {
-                            View v = binding.rvBanner.getChildAt(i);
-                            v.setAlpha(0.0f);
-                            v.animate().alpha(1.0f)
-                                    .setDuration(300)
-                                    .setStartDelay(i * 50)
-                                    .start();
-                        }
-                        return true;
-                    }
-                });
-
-         timer1 = new Timer();
-        timer1.scheduleAtFixedRate(new RemindTask1(), 0, 2000);
-
+        SliderAdapter adapter = new SliderAdapter(getActivity(), advertiseList);
+        binding.slider.setSliderAdapter(adapter);
+        binding.slider.setScrollTimeInSec(3);
+        binding.slider.setAutoCycle(true);
+        binding.slider.startAutoCycle();
     }
 
-    private class RemindTask1 extends TimerTask {       // this remind task is used for advertise Recycler view
-        @Override
-        public void run() {
-            if (getActivity() != null) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (advertisePosition == advertiseList.size()) {
-                            advertisePosition = -1;
-                            advertisePosition++;
-                        } else {
-                            advertisePosition++;
-                        }
-                        binding.rvBanner.getLayoutManager().scrollToPosition(advertisePosition);
-                    }
-                });
-            }
-        }
-    }
 
     @Override
     public void onResume() {
@@ -424,18 +365,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if(timer1 != null){
-            timer1.cancel();
-            //cancel timer task and assign null
-        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(timer1 != null){
-            timer1.cancel();
-            //cancel timer task and assign null
-        }
     }
 }

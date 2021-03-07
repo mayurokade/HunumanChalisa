@@ -50,5 +50,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$nav_version"
     implementation 'com.github.whinc:ratingbar:1.1.1'
 
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 
 }

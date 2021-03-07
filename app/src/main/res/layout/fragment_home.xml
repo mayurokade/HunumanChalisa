@@ -17,7 +17,7 @@
             layout="@layout/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,26 +29,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.8">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvBanner"
+                <!-- <androidx.recyclerview.widget.RecyclerView
+                     android:id="@+id/rvBanner"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:padding="@dimen/dp40" />-->
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/dp40" />
+                    android:layout_margin="@dimen/dp30"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="right"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorEnabled="false"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="true" />
 
                 <ImageView
                     android:id="@+id/ivRightBell"
-                    android:layout_width="@dimen/dp70"
-                    android:layout_height="@dimen/dp70"
-                    android:layout_marginRight="-10dp"
+                    android:layout_width="@dimen/dp50"
+                    android:layout_height="@dimen/dp50"
+                    android:layout_margin="@dimen/dp15"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_bell_right" />
+                    android:src="@drawable/ic_text_change" />
 
                 <ImageView
                     android:id="@+id/ivLeftBell"
                     android:layout_width="@dimen/dp70"
                     android:layout_height="@dimen/dp70"
-                    android:layout_marginLeft="-10dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="-10dp"
                     android:src="@drawable/ic_bell_left" />
 
 
@@ -57,10 +68,10 @@
                     android:layout_width="@dimen/dp50"
                     android:layout_height="@dimen/dp50"
                     android:layout_alignParentLeft="true"
-                    android:scaleType="fitXY"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
-                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_shank" />
 
             </RelativeLayout>
@@ -130,8 +141,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:gravity="end"
-                        android:layout_weight="0.1">
+                        android:layout_weight="0.1"
+                        android:gravity="end">
 
                         <ImageView
                             android:id="@+id/ivPrevious"
@@ -145,8 +156,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="0.1">
+                        android:layout_weight="0.1"
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/ivPlay"
