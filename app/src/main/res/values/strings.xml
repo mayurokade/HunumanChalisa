@@ -10,4 +10,8 @@
     <string name="ringtone_set_success">Rigntone set successfully</string>
     <string name="notification_set_success">Notification tone</string>
     <string name="operation_failed">Failed\\</string>
+    <string name="str_exit">Exit</string>
+    <string name="str_are_sure">Are you sure you want to exit ?</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_no">No</string>
 </resources>

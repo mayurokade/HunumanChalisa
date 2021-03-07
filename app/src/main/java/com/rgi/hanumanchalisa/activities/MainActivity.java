@@ -1,5 +1,6 @@
 package com.rgi.hanumanchalisa.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
@@ -42,11 +43,25 @@ public class MainActivity extends AppCompatActivity {
         if (Navigation.findNavController(this, R.id.fragment2)
                 .getCurrentDestination().getId() == R.id.homeFragment) {
             // handle back button the way you want here
-            finish();
-            System.exit(0);
+            showCloseAlert();
+
             return;
         }
         super.onBackPressed();
 
+    }
+
+    private void showCloseAlert() {
+        new AlertDialog.Builder(this).setTitle(getString(R.string.str_exit))
+                .setMessage(getString(R.string.str_are_sure))
+                .setPositiveButton(getString(R.string.str_yes),
+                        (dialog, which) -> {
+                            // Perform Action & Dismiss dialog
+                            finish();
+                            System.exit(0);
+                        }).setNegativeButton(getString(R.string.str_no), (dialog, which) -> {
+            // Do nothing
+            dialog.dismiss();
+        }).create().show();
     }
 }
