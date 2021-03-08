@@ -137,7 +137,6 @@ public class MenuFragment extends Fragment {
             String path = "https://play.google.com/store/apps/details?id=" + getActivity().getPackageName();
             smsIntent.putExtra("sms_body", path);
             startActivity(smsIntent);
-
         });
 
         binding.llWhatsApp.setOnClickListener(v -> {
